@@ -5,13 +5,13 @@ from django.contrib.auth.models import User
 #1.Students model
 class Student(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  admin_number = models.CharField(unique=True, blank=False, null=False)
+  admin_number = models.CharField(unique=True, blank=False, null=False, max_length=6)
   last_name = models.CharField(max_length=50)
-  middle_name = models.CharField(max_length=50, blank=True, required=False)
+  middle_name = models.CharField(max_length=50, blank=True)
   first_name = models.CharField(max_length=50)
-  age = models.IntegerField(max=30, min=1)
-  date_of_birth = models.DateField(null=False, blank=False, required=True)
-  phone_number = models.PositiveIntegerField(required=False, null=True)
+  age = models.PositiveIntegerField()
+  date_of_birth = models.DateField()
+  phone_number = models.PositiveIntegerField( null=True)
   date_admitted = models.DateField(auto_now=True)
   # profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
@@ -49,7 +49,7 @@ class CourseRegistration(models.Model):
 class Marks(models.Model):
   student = models.ForeignKey(Student, on_delete=models.CASCADE)
   subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-  marks_obtained = models.IntegerField(max=100, min=0)
+  marks_obtained = models.IntegerField()
     
   def __str__(self):
     return f"{self.student.admin_number} {self.subject.subject_name} {self.marks_obtained}"
