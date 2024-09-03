@@ -8,6 +8,7 @@ django = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
 django-bootstrap5 = "*"
+pillow = "*"
 
 [dev-packages]
 
