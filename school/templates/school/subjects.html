@@ -7,11 +7,11 @@
   
 
 {% block content %}
-  <p class="text-center text-lg p-3 m-2">Subjects not yet updated. Keep checking.</p>
+  <p class="text-center text-lg p-3 m-2">Available Subjects in our Curriculum.</p>
   
   {% for subject in subjects %}
 
-    <h2>{{ subject }}</h2>
+    <h4 class="subjects">{{ subject }}</h4>
   {% endfor %}
     
 {% endblock content %}
