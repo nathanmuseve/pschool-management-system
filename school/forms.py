@@ -13,7 +13,7 @@ class StudentRegistrationForm(forms.ModelForm):
 class StudentAdmissionForm(forms.ModelForm):
     subjects = forms.ModelMultipleChoiceField(
         queryset=Subjects.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.SelectMultiple(attrs={'rows':5})
     )
 
     class Meta:
