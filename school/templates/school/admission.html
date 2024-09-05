@@ -7,16 +7,16 @@
   
 
 {% block content %}
-<!-- <section>
-  <h1 class="text-center lg">Welcome to our Admission side.</h1>
-  <p>Please fill in all the required fields for you to be registerd in our database.</p>
+<section>
+  <h1 class="text-center lg p-2">Welcome to our Admission side.</h1>
+  <p class="text-center text-lg text-sm text-md p-2" >Please fill in all the required fields for you to be registerd in our database.</p>
   <div class="form">
     <form action="{% url 'school:admission' %}" method="post">
       {% csrf_token %}
       {{ form }}
-      <button class="btn primary lg text-center" type="submit">Register</button>
+      <button type="submit">Register</button>
   </form>
   </div>
-</section> -->
+</section>
 {% endblock content %}
   

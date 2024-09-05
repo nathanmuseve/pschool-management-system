@@ -9,8 +9,9 @@ app_name = "school"
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('departments/', views.departments, name='departments'),
     path('history/', views.history, name='history'),
-    path('philosopy/', views.philosopy, name='philosopy'),
+    path('philosophy/', views.philosophy, name='philosophy'),
     path('vission_mission/', views.vission, name='vission'),
     path('goal/', views.goal, name='goal'),
     path('values/', views.values, name='values'),

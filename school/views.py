@@ -6,8 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 
 #1. Create your views here.
-def test(request):
-  return render(request, 'school/test.html')
+def departments(request):
+  return render(request, 'school/departments.html')
 
 #2.home
 def home(request):
@@ -18,8 +18,8 @@ def history(request):
   return render(request, 'school/history.html')
 
 #4.philosopy
-def philosopy(request):
-  return render(request, 'school/philosopy.html')
+def philosophy(request):
+  return render(request, 'school/philosophy.html')
   
 #6.vission
 def vission(request):

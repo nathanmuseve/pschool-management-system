@@ -17,7 +17,7 @@ class StudentAdmissionForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Admission
+        model = StudentDetails
         fields = '__all__'
 
 #3.StudentProfile form

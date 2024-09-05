@@ -19,16 +19,26 @@
         
         <ul>
           <li><a href="{% url 'school:home' %}">Home</a></li>
-          <li><a href="">About <i class="fa-solid fa-caret-down"></i>
-            <div class="dropdown">
-              <span><a href="{% url 'school:history' %}">History <i class="fa-solid fa-angle-right"></i></a></span>
-              <span><a href="{% url 'school:philosophy' %}">Our Pilosophy <i class="fa-solid fa-angle-right"></i></a></span>
-              <span><a href="{% url 'school:vission' %}">Vision & Mission <i class="fa-solid fa-angle-right"></i></a></span>
-              <span><a href="{% url 'school:goal' %}">Our Goals <i class="fa-solid fa-angle-right"></i></a></span>
-              <span><a href="{% url 'school:values' %}">Our Values <i class="fa-solid fa-angle-right"></i></a></span>
+          <li class="dropdown">
+            <a href="#">About <i class="fa-solid fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="{% url 'school:history' %}">History <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:philosophy' %}">Our Philosophy <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:vission' %}">Vision & Mission <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:goal' %}">Our Goals <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:values' %}">Our Values <i class="fa-solid fa-angle-right"></i></a>
             </div>
-          </a></li>
-          <li><a href="">School<i class="fa-solid fa-caret-down"></i><i class="fa-solid fa-angle-right"></i></a></li>
+          </li>
+          <li class="dropdown">
+            <a href="#">School <i class="fa-solid fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="{% url 'school:enrollment' %}">Enrollment <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:admission' %}">Admissions <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:subjects' %}">Subjects <i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:departments' %}">Staff<i class="fa-solid fa-angle-right"></i></a>
+              <a href="{% url 'school:values' %}">Sudents <i class="fa-solid fa-angle-right"></i></a>
+            </div>
+          </li>
           <li><a href="">School<i class="fa-solid fa-angle-left"></i></a></li>
           <li><a href="{% url 'school:contact'  %}">Contact</a></li>
         </ul>
@@ -89,6 +99,7 @@
     
   {%  bootstrap_javascript %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'css/scripts.js' %}"></script>
 </main>
 </body>
 </html>
