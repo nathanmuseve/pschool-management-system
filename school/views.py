@@ -1,55 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Department, Subjects, StudentDetails, Admission, Staff, NonStaff, Marks
-from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePic, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm
+from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth import login, logout, authenticate
 
-# Create your views here.
+#1. Create your views here.
 def test(request):
   return render(request, 'school/test.html')
 
-#home
+#2.home
 def home(request):
   return render(request, 'school/home.html')
 
-#history
+#3.history
 def history(request):
   return render(request, 'school/history.html')
 
-#philosopy
+#4.philosopy
 def philosopy(request):
   return render(request, 'school/philosopy.html')
 
-#mission
+#5.mission
 def mission(request):
   return render(request, 'school/mission.html')
 
-#vission
+#6.vission
 def vission(request):
   return render(request, 'school/vission.html')
 
-#goal
+#7.goal
 def goal(request):
   return render(request, 'school/goal.html')
 
-#values
+#8.values
 def values(request):
   return render(request, 'school/values.html')
 
-#enrollment
+#9.enrollment
 def enrollment(request):
   return render(request, 'school/enrollment.html')
 
-#admission
+#10.admission
 def admission(request):
+  form = StudentAdmissionForm()
+  if request.method == "POST":
+    form = StudentAdmissionForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return render(request, 'school/admission_success.html', { 'form':form})  
+  else:
+    form = StudentAdmissionForm()
+  return render(request, 'school/admission.html', { 'form':form })
 
-  return render(request, 'school/admission.html')
-
-#curriculum
+#11.curriculum
 def curriculum(request):
   return render(request, 'school/curriculum.html')
 
-#subjects
+#12.subjects
 def subjects(request):
-  student = StudentDetails.objects.get(id=1)
+  student = Subjects.objects.get(id=1)
   subjects_taken = student.subjects.all()
   context = {
     'student': 'student',
@@ -57,55 +66,230 @@ def subjects(request):
   }
   return render(request, 'school/subjects.html', context)
 
-#departments
+#13.departments
 def departments(request):
   departments = Department.objects.all()
   return render(request, 'school/departments.html', { 'departments':departments })
 
-#student portal
+#14.student portal
+@login_required(login_url='school:student_login')
+@permission_required(('school.change_StudentDetails', 'school.view_StudentDetails'))
 def student_portal(request):
   studentdetails = StudentDetails.objects.all()
   return render(request, 'school/student_portal.html', { 'studentdetails':studentdetails })
 
-#student_registration
+#15.student_registration
 def student_registration(request):
-  return render(request, 'school/student_registration.html')
+  student = Admission.objects.all()
+  form = StudentRegistrationForm()
+  context = {
+    'student':student,
+    'form':form,
+  }
+  if request.method == "POST":
+    form = StudentRegistrationForm(request.POST, request.FILES)
+    if form.is_valid():
+      login(request, form.save())
+      return redirect('school:home')
+  else:
+    form = StudentRegistrationForm()
+  return render(request, 'school/student_registration.html', context)
 
-#student_logout
+#16.student login
+def student_login(request):
+  if request.method == "POST":
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+      login(request, user)
+      # return redirect('school:student_portal')
+  else:
+    error_message = "Invalid entries. Confirm that passwords match."
+  return render(request, 'school:student_portal',{ 'error_message':error_message } )
+
+#17.student_logout
 def student_logout(request):
-  return render(request, 'school/student_logout.html')
-
-#logout_success
+  student = Admission.objects.all()
+  if request.method == "POST":
+    logout(request)
+    return render(request,'school/logout_success.html', { 'student':student })
+  
+#18.logout_success
 def logout_success(request):
   return render(request, 'school/logout_success.html')
 
-#staff_registration
+#19.Student profile update
+def student_profile_update(request):
+  form = StudentProfileForm()
+  if request.method == "POST":
+    form = StudentProfileForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('school:student_portal')
+  else:
+    form = StudentProfileForm()
+  return render(request, 'school/student_portal.html', { 'form':form })
+
+#20 STUDENT_PIC updtae
+def student_pic_update(request):
+  form = StudentProfilePicForm()
+  if request.method == "POST":
+    form = StudentProfilePicForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('school:student_portal')
+  else:
+    form = StudentProfilePicForm()
+  return render(request, 'school/student_portal.html', { 'form':form })
+    
+#21.Staff portal
+@login_required(login_url='school:staff_login')
+@permission_required(('school.view_Admission', 'school.add_Admission', 'school.change_Admission', 'school.view_Marks','school.add_Marks','school.change_Marks', 'school.delete_delete'))
+def staff_portal(request):
+  staff = Staff.objects.all()
+  return render(request, 'school/staff_portal.html', { 'staff':staff })
+
+#22.staff_registration
 def staff_registration(request):
-  return render(request, 'school/staff_registration.html')
+  staff = Staff.objects.all()
+  form = StaffRegistrationForm()
+  context = {
+    'staff':staff,
+    'form':form,
+  }
+  if request.method == "POST":
+    form = StaffRegistrationForm(request.POST, request.FILES)
+    if form.is_valid():
+      login(request, form.save())
+      return redirect('school:home')
+  else:
+    form = StaffRegistrationForm()
+  return render(request, 'school/staff_registration.html', context)
 
-#staff_login
+#23.staff_login
 def staff_login(request):
-  return render(request, 'school/staff_login.html')
+  if request.method == "POST":
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(email=email, password=password)
+    if user is not None:
+      login(request, user)
+      # return redirect('school:staff_portal')
+  else:
+    error_message = "Invalid entries. Confirm that passwords match."
+  return render(request, 'school/staff_portal.html',{ 'error_message':error_message } )
 
-#staff_logout
+#23.staff_logout
 def staff_logout(request):
-  return render(request, 'school/staff_logout.html')
+  staff = Staff.objects.all()
+  if request.method == "POST":
+    logout(request)
+    return render(request,'school/logout_success.html', { 'staff':staff })
 
-#non_staff_registration
+#24.staff profile update
+def staff_profile_update(request):
+  form = StaffProfileForm()
+  if request.method == "POST":
+    form = StaffProfileForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('school:staff_portal')
+  else:
+    form = StaffProfileForm()
+  return render(request, 'school/staff_portal.html', { 'form':form })
+
+#25 staff pic updtae
+def staff_pic_update(request):
+  form = StaffProfilePicForm()
+  if request.method == "POST":
+    form = StaffProfilePicForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('school:staff_portal')
+  else:
+    form = StaffProfilePicForm()
+  return render(request, 'school/staff_portal.html', { 'form':form })
+
+#26.non staff portal
+@login_required(login_url='school:non_staff_login')
+def non_staff_portal(request):
+  return render(request, 'school/non_staff_portal.html')
+
+#27.non_staff_registration
 def non_staff_registration(request):
-  return render(request, 'school/non_staff_registration.html')
+  staff = NonStaff.objects.all()
+  form = NonStaffRegistrationForm()
+  context = {
+    'staff':staff,
+    'form':form,
+  }
+  if request.method == "POST":
+    form = NonStaffRegistrationForm(request.POST, request.FILES)
+    if form.is_valid():
+      login(request, form.save())
+      return redirect('school:home')
+  else:
+    form = NonStaffRegistrationForm()
+  return render(request, 'school/non_staff_registration.html',context)
 
-#non_staff_login
+#28.non_staff_login
 def non_staff_login(request):
-  return render(request, 'school/non_staff_login.html')
+  if request.method == "POST":
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(email=email, password=password)
+    if user is not None:
+      login(request, user)
+      # return redirect('school:staff_portal')
+  else:
+    error_message = "Invalid entries. Confirm that passwords match."
+  return render(request, 'school/non_staff_portal.html',{ 'error_message':error_message } )
 
-#non_staff_logout
+#29.non_staff_logout
 def non_staff_logout(request):
-  return render(request, 'school/non_staff_logout.html')
+  nonstaff = NonStaff.objects.all()
+  if request.method == "POST":
+    logout(request)
+    return render(request,'school/logout_success.html', { 'nonstaff':nonstaff })
 
+#30.Non staff profile update
+def non_staff_profile_update(request):
+  form = NonStaffProfileForm()
+  if request.method == "POST":
+    form = NonStaffProfileForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('school:non_staff_portal')
+  else:
+    form = NonStaffProfileForm()
+  return render(request, 'school/non_staff_portal.html', { 'form':form })
 
+#31 non staff pic updtae
+def non_staff_pic_update(request):
+  form = NonStaffProfilePicForm()
+  if request.method == "POST":
+    form = NonStaffProfilePicForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('school:non_staff_portal')
+  else:
+    form = NonStaffProfilePicForm()
+  return render(request, 'school/non_staff_portal.html', { 'form':form })
 
-
-
-
-
+#32. Marks 
+@login_required(login_url='school:staff_login')
+def marks(request):
+  marks = Marks.objects.all()
+  form = StudentMarksForm()
+  context = {
+    'marks':marks,
+    'form':form,
+  }
+  if request.method == "POST":
+    form = StudentMarksForm(request.POST)
+    if form.is_valid():
+      form.save()
+  else:
+    form = StudentMarksForm()
+  return render(request, 'school/marks.html', context)

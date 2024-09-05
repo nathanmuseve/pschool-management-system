@@ -1,3 +1,7 @@
-body {
-  background-color: aqua;
+ 
+
+ /* home page  */
+.home {
+  background-color: #f0f0f0;
+  background-image: url("../static/images/logo.png");
 }
