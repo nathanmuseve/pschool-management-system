@@ -6,7 +6,7 @@ from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Depart
 class StudentRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'password','password_confirmation']
+        fields = ['username', 'password']
 
 #2.student admission form 
 class StudentAdmissionForm(forms.ModelForm):
@@ -73,7 +73,7 @@ class StaffProfileForm(forms.ModelForm):
         fields = '__all__'
 
 #7.StaffProfilePic form
-class StaffProfilePicForm(forms.ModelsForm):
+class StaffProfilePicForm(forms.ModelForm):
     class Meta:
         model = Staff
         fields =['profile_picture',]
@@ -103,7 +103,7 @@ class NonStaffProfileForm(forms.ModelForm):
         fields = '__all__'
 
 #10.NonStaffProfilePic form
-class NonStaffProfilePicForm(forms.ModelsForm):
+class NonStaffProfilePicForm(forms.ModelForm):
     class Meta:
         model = NonStaff
         fields =['profile_picture',]
