@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Contacts
+{% endblock title %}
+  
+
+{% block content %}
+  <div class="form">
+    <h1>Contact Us</h1>
+    <form action="{% url 'school:contact' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn primary lg text-center" type="submit">Send Message<i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+    <a href="{% url 'school:home' %}">Return to home page</a>
+  </div>
+{% endblock content %}
+  

@@ -145,3 +145,13 @@ class Marks(models.Model):
 
     def __str__(self):
         return f"{self.student.admin_number} {self.student.first_name} {self.student.last_name}"
+#8. Contact model
+class Contact(models.Model):
+    name = models.CharField(max_length=70)
+    email = models.EmailField(max_length=50)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+    cc_myself = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.name} {self.subject}"

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Department, Subjects, StudentDetails, Admission, Staff, NonStaff, Marks
-from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm
+from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm, ContactForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
 
@@ -19,11 +19,7 @@ def history(request):
 #4.philosopy
 def philosopy(request):
   return render(request, 'school/philosopy.html')
-
-#5.mission
-def mission(request):
-  return render(request, 'school/mission.html')
-
+  
 #6.vission
 def vission(request):
   return render(request, 'school/vission.html')
@@ -293,3 +289,14 @@ def marks(request):
   else:
     form = StudentMarksForm()
   return render(request, 'school/marks.html', context)
+#33.Contact Form
+def contact(request):
+  form = ContactForm()
+  if request.method == "POST":
+    form = ContactForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('school:home')
+  else:
+    form = ContactForm()
+  return render(request, 'school/contact.html', { 'form':form })

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Department,Marks
+from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Department,Marks, Contact
 
 #1.student registration form
 class StudentRegistrationForm(forms.ModelForm):
@@ -92,4 +92,10 @@ class StudentMarksForm(forms.ModelForm):
     )
     class Meta:
         model = Marks
+        fields = '__all__'
+
+#12. Contact Form
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
         fields = '__all__'
