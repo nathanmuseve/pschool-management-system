@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Department
+from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Department,Marks
 
 #1.student registration form
 class StudentRegistrationForm(forms.ModelForm):
@@ -10,10 +10,6 @@ class StudentRegistrationForm(forms.ModelForm):
 
 #2.student admission form 
 class StudentAdmissionForm(forms.ModelForm):
-    gender = forms.ModelMultipleChoiceField(
-        queryset=StudentDetails.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
     subjects = forms.ModelMultipleChoiceField(
         queryset=Subjects.objects.all(),
         widget=forms.CheckboxSelectMultiple
@@ -25,10 +21,6 @@ class StudentAdmissionForm(forms.ModelForm):
 
 #3.StudentProfile form
 class StudentProfileForm(forms.ModelForm):
-    gender = forms.ModelMultipleChoiceField(
-        queryset=StudentDetails.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
     subjects = forms.ModelMultipleChoiceField(
         queryset=Subjects.objects.all(),
         widget=forms.CheckboxSelectMultiple
@@ -38,7 +30,7 @@ class StudentProfileForm(forms.ModelForm):
         fields = ['first_name', 'middle_name', 'other_name', 'last_name', 'gender', 'location', 'country', 'age', 'date_of_birth', 'parent_phone_number', 'subjects', ]
 
 #4.Student profile Pic Update
-class StudentProfilePic(forms.ModelForm):
+class StudentProfilePicForm(forms.ModelForm):
     class Meta:
         model = StudentDetails
         fields = ['profile_picture',]
@@ -51,14 +43,6 @@ class StaffRegistrationForm(forms.ModelForm):
 
 #6.Staff Profile Form
 class StaffProfileForm(forms.ModelForm):
-    gender = forms.ModelMultipleChoiceField(
-        queryset=Staff.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
-    marital_status = forms.ModelMultipleChoiceField(
-        queryset=Staff.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
     departments = forms.ModelMultipleChoiceField(
         queryset=Department.objects.all(),
         widget = forms.CheckboxInput
@@ -86,14 +70,7 @@ class NonStaffRegistrationForm(forms.ModelForm):
 
 #9.NonStaff Registration Form
 class NonStaffProfileForm(forms.ModelForm):
-    gender = forms.ModelMultipleChoiceField(
-        queryset=NonStaff.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
-    marital_status = forms.ModelMultipleChoiceField(
-        queryset=NonStaff.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
+    
     departments = forms.ModelMultipleChoiceField(
         queryset=Department.objects.all(),
         widget = forms.CheckboxInput
@@ -107,3 +84,12 @@ class NonStaffProfilePicForm(forms.ModelForm):
     class Meta:
         model = NonStaff
         fields =['profile_picture',]
+#11. Student marks
+class StudentMarksForm(forms.ModelForm):
+    subject = forms.ModelMultipleChoiceField(
+        queryset=Marks.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+    class Meta:
+        model = Marks
+        fields = '__all__'
