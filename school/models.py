@@ -49,6 +49,7 @@ class StudentDetails(models.Model):
     middle_name = models.CharField(max_length=50, blank=True)
     other_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
+    username = models.CharField(max_length=20)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     location = models.CharField(max_length=50)
     country = models.CharField(max_length=50, blank=True)

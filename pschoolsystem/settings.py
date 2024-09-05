@@ -128,35 +128,35 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
     #MEDIA AND STATIC FOR DEVELOPMENT
-STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+# STATIC_URL = 'static/'
+# MEDIA_URL = '/media/'
 
-# STATIC_ROOT = BASE_DIR / 'assets'
-# MEDIA_ROOT = BASE_DIR / 'media'
+# # STATIC_ROOT = BASE_DIR / 'assets'
+# # MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
     #MEDIA AND STATIC FOR PRODUCTION
 # # Static files (CSS, JavaScript, Images)
-# STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'static'
+# STATIC_ROOT = BASE_DIR / 'assets'
+STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static"
-#     ]
-
-# # Media files (Uploaded files)
-# MEDIA_URL = '/media/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ]
+# Media files (Uploaded files)
 # MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 
 # Bootstrap 5 integration using CDN (Optional)
 BOOTSTRAP5 = {
     'base_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/',
 }
-
+LOGIN_REDIRECT_URL = 'home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

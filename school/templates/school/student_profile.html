@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Student Profile
+{% endblock title %}
+  
+
+{% block content %}
+  <section>
+    <h1>Student Profile</h1>
+    <div class="form">
+      <form action="{% url 'school:student_profile_update' %}" method="post">
+        {% csrf_token %}
+        {{form }}
+        <button class="btn primary lg text-center" type="submit">Update Profile</button>
+    </form>
+    </div>
+  </section>
+{% endblock content %}
+  

@@ -3,6 +3,7 @@ from .models import Department, Subjects, StudentDetails, Admission, Staff, NonS
 from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm, ContactForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
 
 #1. Create your views here.
 def test(request):
@@ -34,7 +35,8 @@ def values(request):
 
 #9.enrollment
 def enrollment(request):
-  return render(request, 'school/enrollment.html')
+  students = StudentDetails.objects.all()
+  return render(request, 'school/enrollment.html', { 'students':students })
 
 #10.admission
 def admission(request):
@@ -54,11 +56,9 @@ def curriculum(request):
 
 #12.subjects
 def subjects(request):
-  student = Subjects.objects.get(id=1)
-  subjects_taken = student.subjects.all()
+  subjects = Subjects.objects.all()
   context = {
-    'student': 'student',
-    'subjects_taken':subjects_taken,
+    'subjects': subjects,
   }
   return render(request, 'school/subjects.html', context)
 
@@ -68,11 +68,16 @@ def departments(request):
   return render(request, 'school/departments.html', { 'departments':departments })
 
 #14.student portal
-@login_required(login_url='school:student_login')
-@permission_required(('school.change_StudentDetails', 'school.view_StudentDetails'))
+# @login_required(login_url='school:student_login')
+# @permission_required(('school.change_StudentDetails', 'school.view_StudentDetails'))
 def student_portal(request):
-  studentdetails = StudentDetails.objects.all()
-  return render(request, 'school/student_portal.html', { 'studentdetails':studentdetails })
+  students = StudentDetails.objects.all()
+  users = User.objects.all()
+  context = {
+    'students': students,
+    'users': users,
+  }
+  return render(request, 'school/students_portal.html', context)
 
 #15.student_registration
 def student_registration(request):
@@ -99,10 +104,11 @@ def student_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
       login(request, user)
-      # return redirect('school:student_portal')
-  else:
-    error_message = "Invalid entries. Confirm that passwords match."
-  return render(request, 'school:student_portal',{ 'error_message':error_message } )
+      next_url = request.POST.get('next') or request.GET.get('next') or 'home'
+      return redirect('next_url')
+  # else:
+  #   error_message = "Invalid entries. Confirm that passwords match."
+  return render(request, 'school/students_portal.html' )
 
 #17.student_logout
 def student_logout(request):
@@ -125,7 +131,7 @@ def student_profile_update(request):
       return redirect('school:student_portal')
   else:
     form = StudentProfileForm()
-  return render(request, 'school/student_portal.html', { 'form':form })
+  return render(request, 'school/student_profile.html', { 'form':form })
 
 #20 STUDENT_PIC updtae
 def student_pic_update(request):

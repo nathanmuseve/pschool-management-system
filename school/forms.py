@@ -8,6 +8,7 @@ class StudentRegistrationForm(forms.ModelForm):
         model = User
         fields = ['username', 'password']
 
+
 #2.student admission form 
 class StudentAdmissionForm(forms.ModelForm):
     subjects = forms.ModelMultipleChoiceField(
@@ -21,13 +22,9 @@ class StudentAdmissionForm(forms.ModelForm):
 
 #3.StudentProfile form
 class StudentProfileForm(forms.ModelForm):
-    subjects = forms.ModelMultipleChoiceField(
-        queryset=Subjects.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-    )
     class Meta:
         model = StudentDetails
-        fields = ['first_name', 'middle_name', 'other_name', 'last_name', 'gender', 'location', 'country', 'age', 'date_of_birth', 'parent_phone_number', 'subjects', ]
+        fields = ['first_name', 'middle_name', 'other_name', 'last_name', 'username', 'gender', 'location', 'country', 'age', 'date_of_birth', 'parent_phone_number',  ]
 
 #4.Student profile Pic Update
 class StudentProfilePicForm(forms.ModelForm):

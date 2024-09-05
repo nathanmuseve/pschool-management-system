@@ -8,22 +8,51 @@
 
 {% block content %}
   <section class="container">
-    <div class="regiter">
-      <section>
-        <h1 class="text-center lg">Welcome to our Admission side.</h1>
-        <p>Please fill in all the required fields for you to be registerd in our database.</p>
-        <div class="form">
-          {{ form.non_feild_errors }}
-          <form action="{% url 'school:admission' %}" method="post">
-            {% csrf_token %}
-            {{ form.username.error }}
-            {{ form.username.label_tag }}
-            {{ form.username }}
-
-            <button class="btn primary lg text-center" type="submit">Register</button>
-        </form>
-        </div>
-      </section>
+    <div class="profile">
+      <h1>Student Profile</h1>
+      
+      {% for student in students  %}
+      {% if student.username == user.username %}
+      <h2>Welcome {{ student.first_name }} {{ student.last_name }}.</h2>
+      <p>Student ID: {{ student.admin_number }}</p>
+      <p>First Name: <h2>{{ student.first_name }}</h2></p>
+      <p>Middle Name: <h2>{{ student.middle_name }}</h2></p>
+      <p>Other Name: <h2>{{ student.other_name }}</h2></p>
+      <p>Last Name: <h2>{{ student.last_name }}</h2></p>
+      <p>Location Name: <h2>{{ student.location }}</h2></p>
+      <p>Country Name: <h2>{{ student.country }}</h2></p>
+      <p>Gender: <h2>{{ student.gender }}</h2></p>
+      <p>Phone Number: <h2>{{ student.phone_number }}</h2></p>
+      <p>Datew of Birth: <h2>{{ student.date_of_birth }}</h2></p>
+      <p>Age: <h2>{{ student.age }}</h2></p>
+      <p>Date Registered: <h2>{{ student.date_registered }}</h2></p>
+      {% endif %}
+      {% endfor %}
+        
+    </div>
+    <div class="side">
+      <div>
+        {% for user in Users %} 
+        {% if user.username == user.username %}
+        <h4>Username: {{ user.username }}</h4>
+        {% endif %}
+        {% endfor %}
+      
+      {% for student in students  %}
+      {% if student.username == user.username %}
+      <p>Student ID: {{ student.admin_number }}</p>
+      {% endif %}
+      {% endfor %}
+        
+      
+      
+      </div>
+      
+      {% for student in students %}
+      <img width="50" height="50" style="border-radius:50%; outline:2px solid green;" src="{{ student.profile_picture.url }}" alt="PofilePicture">
+      {% endfor %}
+        
+        
     </div>
   </section>
 {% endblock content %}

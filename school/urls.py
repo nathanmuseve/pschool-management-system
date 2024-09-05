@@ -1,9 +1,8 @@
 from django.urls import path
 from . import views
 from debug_toolbar.toolbar import debug_toolbar_urls
-from django.conf.urls.static import settings
-from django.conf.urls import static
 from django.conf import settings
+from django.conf.urls.static import static
 
 #application name
 app_name = "school"
@@ -41,7 +40,4 @@ urlpatterns = [
     path('non_staff_profile_update', views.non_staff_profile_update, name='non_staff_profile_update'),
     path('non_staff_pic_update', views.non_staff_pic_update, name='non_staff_pic_update'),
     path('Marks', views.Marks, name='Marks'),
-]
-
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
-
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + debug_toolbar_urls()

@@ -7,6 +7,30 @@
   
 
 {% block content %}
+<section class="container">
+  <h1 class="text-center lg">Welcome to our Admissions.</h1>
+  <p>Please login to access your account</p>
+  <div class="form">
+    <form action="{% url 'school:student_login' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      {{ error_message }}
+  </form>
   
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+    <p class="text-center-text-lg">Don't have an account? <a href="{% url 'school:student_registration' %}">Register</a></p>
+  </div>
+</section>
 {% endblock content %}
   

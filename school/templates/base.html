@@ -10,16 +10,25 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="container-fluid">
+<body>
   
 <main class=" ">
   {% block navigation %}
     <header>
       <nav>
+        
         <ul>
-          <li><a href="{% url 'school:home' %}"><img src="./static/images/logo.png" alt="Home"></a></li>
-          <li><a href="">About <i class="fa-solid fa-angle-right"></i></a></li>
-          <li><a href="">School<i class="fa-solid fa-angle-right"></i></a></li>
+          <li><a href="{% url 'school:home' %}">Home</a></li>
+          <li><a href="">About <i class="fa-solid fa-caret-down"></i>
+            <div class="dropdown">
+              <span><a href="{% url 'school:history' %}">History <i class="fa-solid fa-angle-right"></i></a></span>
+              <span><a href="{% url 'school:philosophy' %}">Our Pilosophy <i class="fa-solid fa-angle-right"></i></a></span>
+              <span><a href="{% url 'school:vission' %}">Vision & Mission <i class="fa-solid fa-angle-right"></i></a></span>
+              <span><a href="{% url 'school:goal' %}">Our Goals <i class="fa-solid fa-angle-right"></i></a></span>
+              <span><a href="{% url 'school:values' %}">Our Values <i class="fa-solid fa-angle-right"></i></a></span>
+            </div>
+          </a></li>
+          <li><a href="">School<i class="fa-solid fa-caret-down"></i><i class="fa-solid fa-angle-right"></i></a></li>
           <li><a href="">School<i class="fa-solid fa-angle-left"></i></a></li>
           <li><a href="{% url 'school:contact'  %}">Contact</a></li>
         </ul>
@@ -33,47 +42,48 @@
   {% endblock content %}
 
   {% block footer %}
-    <footer class="foot">
-      <div class="address">
-        <ul>
-          <li>P.O BOX - 0000-000.</li>
-          <li><i class="fa-solid fa-location-dot"></i>Nairobi, Kenya</li>
-          <li><i class="fa-solid fa-phone-volume"></i>+254790711289</li>
-          <li><i class="fa-solid fa-phone-volume"></i>+254710100637</li>
-          <li><i class="fa-solid fa-envelope"></i>schoolmanagement@gmail.com</li>
-        </ul>
-      </div>
-      <div class="return-menu">
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">School</a>
-        <a href="">Contact</a>
-      </div>
-      <div class="others">
-        <p>Terms & Condiotions</p>
-        <p>Blogs</p>
-        <p>Security</p>
-        <p>Our History</p>
-      </div>
-      <div class="school">
-        <a href="">Enrollment</a>
-        <a href="">Admission</a>
-        <a href="">Staff Portal</a>
-        <a href="">Students Portal</a>
-        <a href="">Examinations</a>
-      </div>
-    </footer>
-    <section class="details">
-      <div class="socials">
-        <a href=""><i class="fa-brands fa-facebook"></i></a>
-        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
-        <a href=""><i class="fa-brands fa-instagram"></i></a>
-        <a href=""><i class="fa-brands fa-tiktok"></i></a>
-      </div>
-      <p class="copy">&copy; 2024. All rights reserved.</p>
-      <p class="version">Schoolmanagement2024.</p>
-      <p class="designer">Nathan Museve/musevenathan@gmail.com</p>
-
+    <section class="footer">
+      <footer class="foot">
+        <div class="address">
+          <ul>
+            <li>P.O BOX - 0000-000.</li>
+            <li><i class="fa-solid fa-location-dot"></i>Nairobi, Kenya</li>
+            <li><i class="fa-solid fa-phone-volume"></i>+254790711289</li>
+            <li><i class="fa-solid fa-phone-volume"></i>+254710100637</li>
+            <li><i class="fa-solid fa-envelope"></i>schoolmanagement@gmail.com</li>
+          </ul>
+        </div>
+        <div class="return-menu">
+          <a href="{% url 'school:home' %}">Home</a>
+          <a href="{% url 'school:home' %}">About</a>
+          <a href="{% url 'school:home' %}">School</a>
+          <a href="{% url 'school:contact' %}">Contact</a>
+        </div>
+        <div class="others">
+          <p>Terms & Condiotions</p>
+          <p>Blogs</p>
+          <p>Security</p>
+          <p>Our History</p>
+        </div>
+        <div class="school">
+          <a href="{% url 'school:enrollment' %}">Enrollment</a>
+          <a href="{% url 'school:student_registration' %}">Admission</a>
+          <a href="{% url 'school:staff_portal' %}">Staff Portal</a>
+          <a href="{% url 'school:student_portal' %}">Students Portal</a>
+        </div>
+      </footer>
+      <section class="details">
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p class="copy">&copy; 2024. All rights reserved.</p>
+        <p class="version">Schoolmanagement2024.</p>
+        <p class="designer">Nathan Museve/musevenathan@gmail.com</p>
+  
+      </section>
     </section>
   {% endblock footer %}
     

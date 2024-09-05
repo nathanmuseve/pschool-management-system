@@ -7,6 +7,12 @@
   
 
 {% block content %}
+  <p class="text-center text-lg p-3 m-2">Subjects not yet updated. Keep checking.</p>
   
+  {% for subject in subjects %}
+
+    <h2>{{ subject }}</h2>
+  {% endfor %}
+    
 {% endblock content %}
   
