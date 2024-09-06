@@ -4,6 +4,7 @@ from .models import StudentDetails, Admission, Subjects, Staff, NonStaff, Depart
 
 #1.student registration form
 class StudentRegistrationForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter username'}))
     class Meta:
         model = User
         fields = ['username', 'password']

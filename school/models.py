@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 # MODELS
 # 1. Department model
@@ -152,7 +153,7 @@ class Contact(models.Model):
     email = models.EmailField(max_length=50)
     subject = models.CharField(max_length=100)
     message = models.TextField()
-    cc_myself = models.BooleanField(default=False)
+    copy_to_myself = models.BooleanField(default=False)
     
     def __str__(self):
         return f"{self.name} {self.subject}"

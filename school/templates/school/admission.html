@@ -11,7 +11,7 @@
   <h1 class="text-center lg p-2">Welcome to our Admission side.</h1>
   <p class="text-center text-lg text-sm text-md p-2" >Please fill in all the required fields for you to be registerd in our database.</p>
   <div class="form">
-    <form action="{% url 'school:admission' %}" method="post">
+    <form action="{% url 'school:admission' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form }}
       <button type="submit">Register</button>
