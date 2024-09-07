@@ -12,9 +12,19 @@ class StudentRegistrationForm(forms.ModelForm):
 
 #2.student admission form 
 class StudentAdmissionForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg Nelson'}))
+    middle_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'(optional)'}))
+    other_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'(optional)'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg. Joram'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg.nelson89'}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg. Nakuru'}))
+    country = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg. Kenya'}))
+    age = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg.18'}))
+    date_of_birth = forms.CharField(widget=forms.DateInput(attrs={'placeholder':'eg 1990-06-30'}))
+    parent_phone_number = forms.CharField(widget=forms.NumberInput(attrs={'placeholder':'eg 0700000000'}))
     subjects = forms.ModelMultipleChoiceField(
         queryset=Subjects.objects.all(),
-        widget=forms.SelectMultiple(attrs={'rows':5})
+        widget=forms.SelectMultiple(attrs={'rows':8})
     )
 
     class Meta:
@@ -94,6 +104,10 @@ class StudentMarksForm(forms.ModelForm):
 
 #12. Contact Form
 class ContactForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg Nelson Kamau'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'eg example@gmail.com'}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'eg .Job Inquiry'}))
+    message = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Write Your message'}))
     class Meta:
         model = Contact
         fields = '__all__'
