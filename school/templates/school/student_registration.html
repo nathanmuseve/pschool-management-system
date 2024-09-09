@@ -9,7 +9,7 @@
 {% block content %}
 <section class="container">
   <h1 class="text-center lg">Welcome to our Admissions.</h1>
-  <p>Please fill in all the required fields for you to be registerd in our database.</p>
+  <p class="text-center">Please fill in all the required fields for you to be registerd in our database.</p>
   <div class="form">
     <form action="{% url 'school:student_registration' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}

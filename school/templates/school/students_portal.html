@@ -6,52 +6,35 @@
 {% endblock title %}
   
 
+  
+
 {% block content %}
   <section class="container">
-    <div class="profile">
-      <h1>Student Profile</h1>
-      <p class="text-center p-5">Students portal is still under development. </p>
-      {% for student in students  %}
-      {% if student.username == user.username %}
-      <h2>Welcome {{ student.first_name }} {{ student.last_name }}.</h2>
-      <p>Student ID: {{ student.admin_number }}</p>
-      <p>First Name: <h2>{{ student.first_name }}</h2></p>
-      <p>Middle Name: <h2>{{ student.middle_name }}</h2></p>
-      <p>Other Name: <h2>{{ student.other_name }}</h2></p>
-      <p>Last Name: <h2>{{ student.last_name }}</h2></p>
-      <p>Location Name: <h2>{{ student.location }}</h2></p>
-      <p>Country Name: <h2>{{ student.country }}</h2></p>
-      <p>Gender: <h2>{{ student.gender }}</h2></p>
-      <p>Phone Number: <h2>{{ student.phone_number }}</h2></p>
-      <p>Datew of Birth: <h2>{{ student.date_of_birth }}</h2></p>
-      <p>Age: <h2>{{ student.age }}</h2></p>
-      <p>Date Registered: <h2>{{ student.date_registered }}</h2></p>
-      {% endif %}
-      {% endfor %}
-        
-    </div>
-    <div class="side">
-      <div>
-        {% for user in Users %} 
-        {% if user.username == user.username %}
-        <h4>Username: {{ user.username }}</h4>
-        {% endif %}
-        {% endfor %}
-      
-      {% for student in students  %}
-      {% if student.username == user.username %}
-      <p>Student ID: {{ student.admin_number }}</p>
-      {% endif %}
-      {% endfor %}
-        
-      
-      
+    <h1 class="text-center lg">Welcome to Student Portal</h1>
+  <p class="text-center">Please login to accsess your account.</p>
+  <div class="form">
+    <form action="{% url 'school:student_login' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
       </div>
-      
-
-        
-        
-    </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required>
+      </div>
+      <button type="submit" >Login</button>
+      {{ error_message }}
+      <p class="text-center-text-sm">Don't have an account? <a href="{% url 'school:student_registration' %}">Register</a></p>
+  </form>
+  
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+    
+  </div>
+</section>
   </section>
 {% endblock content %}
   

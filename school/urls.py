@@ -17,7 +17,7 @@ urlpatterns = [
     path('values/', views.values, name='values'),
     path('enrollment/', views.enrollment, name='enrollment'),
     path('contact/', views.contact, name='contact'),
-    path('admission/', views.admission, name='admission'),
+    path('feedback/', views.feedback, name='feedback'),
     path('curriculum/', views.curriculum, name='curriculum'),
     path('subjects/', views.subjects, name='subjects'),
     path('departments/', views.departments, name='departments'),
@@ -41,4 +41,4 @@ urlpatterns = [
     path('non_staff_profile_update', views.non_staff_profile_update, name='non_staff_profile_update'),
     path('non_staff_pic_update', views.non_staff_pic_update, name='non_staff_pic_update'),
     path('Marks', views.Marks, name='Marks'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + debug_toolbar_urls()
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + debug_toolbar_urls()

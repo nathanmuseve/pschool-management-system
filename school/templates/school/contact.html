@@ -7,14 +7,25 @@
   
 
 {% block content %}
-  <div class="form">
-    <h1 class="text-center" >Contact Us</h1>
-    <form class="" action="{% url 'school:contact' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Send Message <i class="fa-solid fa-paper-plane"> </i></button>
-    </form>
-    <a href="{% url 'school:home' %}">Return to home page</a>
-  </div>
+  <section class="d-flexjustify-content-betweengap-sm-3align-items-center">
+    <div class="form">
+      <h1 class="text-center" >Contact Us</h1>
+      <form class="" action="{% url 'school:contact' %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit">Send Message <i class="fa-solid fa-paper-plane"> </i></button>
+      </form>
+    </div>
+
+    <div class="form">
+      <h1 class="text-center" >Send Feedback</h1>
+      <form class="" action="{% url 'school:feedback' %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit">Send Feedback <i class="fa-solid fa-paper-plane"> </i></button>
+      </form>
+      <p class="text-center text-sm"><a href="{% url 'school:home' %}">Return to home page</a></p>
+    </div>
+  </section>
 {% endblock content %}
   

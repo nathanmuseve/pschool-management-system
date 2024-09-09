@@ -7,6 +7,15 @@
   
 
 {% block content %}
-  
+<h1 class="text-center lg">Welcome to Staff Login Page.</h1>
+<p>Please login to access your account</p>
+<div class="form">
+  <form action="{% url 'school:staff_login' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+{% endif %}
+  <p class="text-center-text-lg">Don't have an account? <a href="{% url 'school:staff_registration' %}">Register</a></p>
+</div>
+</section>
 {% endblock content %}
   

@@ -7,6 +7,15 @@
   
 
 {% block content %}
-  <p class="text-center text-lg p-5">Staff Portal is yet to be built. Please Keep checking for updates</p>
+<h1 class="text-center lg">Welcome to Staff Login Page.</h1>
+<p>Please login to access your account</p>
+<div class="form">
+  <form action="{% url 'school:staff_portal' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Login</button>
+  <p class="text-center-text-lg">Don't have an account? <a href="{% url 'school:staff_registration' %}">Register</a></p>
+</div>
+
 {% endblock content %}
   

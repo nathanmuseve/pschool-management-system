@@ -7,6 +7,16 @@
   
 
 {% block content %}
-  
+<section class="container">
+  <h1 class="text-center lg">Welcome to Staff Registration Page.</h1>
+  <p class="text-center">Please fill in all the required fields for you to be registerd in our database as Staff.</p>
+  <div class="form">
+    <form action="{% url 'school:staff_registration' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form }}
+      <button  type="submit">Register</button>
+  </form>
+  </div>
+</section>
 {% endblock content %}
   

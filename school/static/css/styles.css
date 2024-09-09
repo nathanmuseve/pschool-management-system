@@ -115,13 +115,13 @@ form {
 }
 input, textarea {
   width: 100%;
-  height: 2rem;
+  /* height: 2rem; */
   text-align: left;
   color: #00517C;
   border: 2px solid #00517C;
   border-radius: 4px;
   outline: none;
-  padding: 2rem;
+  padding: 8px 1rem;
 }
 input[type='checkbox'] {
   width: 50%;
@@ -155,6 +155,7 @@ button {
   color: white;
   border-radius: 4px;
   margin: 6px 0;
+  padding: 8px 1rem;
 }
 /* FOOTER  */
 footer, .details {

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,7 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'pschoolsystem.urls'
@@ -146,7 +148,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    ]
+]
 # Media files (Uploaded files)
 # MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
@@ -156,7 +158,7 @@ MEDIA_URL = '/media/'
 BOOTSTRAP5 = {
     'base_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/',
 }
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'school:home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

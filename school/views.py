@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Department, Subjects, StudentDetails, Admission, Staff, NonStaff, Marks
-from .forms import StudentRegistrationForm, StudentAdmissionForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm, ContactForm
+from .models import Department, Subjects, StudentDetails, Staff, NonStaff, Marks
+from .forms import StudentRegistrationForm, StudentRegistrationForm, StudentProfileForm, StudentProfilePicForm, StaffRegistrationForm, StaffProfileForm, StaffProfilePicForm, NonStaffRegistrationForm, NonStaffProfileForm, NonStaffProfilePicForm,StudentMarksForm, ContactForm,Feedback
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
@@ -38,17 +38,6 @@ def enrollment(request):
   students = StudentDetails.objects.all()
   return render(request, 'school/enrollment.html', { 'students':students })
 
-#10.admission
-def admission(request):
-  form = StudentAdmissionForm()
-  if request.method == "POST":
-    form = StudentAdmissionForm(request.POST, request.FILES)
-    if form.is_valid():
-      form.save()
-      return render(request, 'school/admission_success.html', { 'form':form})  
-  else:
-    form = StudentAdmissionForm()
-  return render(request, 'school/admission.html', { 'form':form })
 
 #11.curriculum
 def curriculum(request):
@@ -80,54 +69,34 @@ def student_portal(request):
   return render(request, 'school/students_portal.html', context)
 
 # User Registration View
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You can now log in')
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             messages.success(request, f'Your account has been created! You can now log in')
+#             return redirect('login')
+#     else:
+#         form = UserRegisterForm()
+#     return render(request, 'users/register.html', {'form': form})
 
 # Profile View and Update
 @login_required
-def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-    
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    
-    return render(request, 'users/profile.html', context)
+def student_profile(request):
+    pass
 
 # View Marks/Results
-@login_required
-def view_marks(request):
-    marks = Marks.objects.filter(student=request.user)
-    return render(request, 'users/marks.html', {'marks': marks})
+# @login_required
+# def view_marks(request):
+#   marks = Marks.objects.filter(student=request.user)
+#   return render(request, 'users/marks.html', {'marks': marks})
 
 
 #15.student_registration
 def student_registration(request):
-  student = Admission.objects.all()
   form = StudentRegistrationForm()
   context = {
-    'student':student,
     'form':form,
   }
   if request.method == "POST":
@@ -147,34 +116,46 @@ def student_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
       login(request, user)
-      next_url = request.POST.get('next') or request.GET.get('next') or 'home'
-      return redirect('next_url')
+      # next_url = request.POST.get('next') or request.GET.get('next') or 'school:home'
+      return redirect('school:home')
   # else:
   #   error_message = "Invalid entries. Confirm that passwords match."
-  return render(request, 'school/students_portal.html' )
+  return render(request, 'school/students_portal.html')
 
 #17.student_logout
 def student_logout(request):
-  student = Admission.objects.all()
   if request.method == "POST":
     logout(request)
-    return render(request,'school/logout_success.html', { 'student':student })
+    # return render(request,'school/logout_success.html', { 'student':student })
   
 #18.logout_success
 def logout_success(request):
   return render(request, 'school/logout_success.html')
 
-#19.Student profile update
+#19.Student profile update . can upadate user datails, profile deatils and profile photo
+@login_required(login_url='student_login/')
 def student_profile_update(request):
-  form = StudentProfileForm()
-  if request.method == "POST":
-    form = StudentProfileForm(request.POST)
-    if form.is_valid():
-      form.save()
+  if request.method == 'POST':
+    user_update_form = StudentRegistrationForm(request.POST, instance=request.user)
+    profile_update_form = StudentProfileForm(request.POST, instance=request.user.student_profile_update)
+    pic_update_form = StudentProfilePicForm(request.POST, request.FILES, instance=request.user.student_profile_update)
+        
+    if user_update_form.is_valid() and profile_update_form.is_valid() and pic_update_form.is_valid():
+      user_update_form.save()
+      profile_update_form.save()
+      pic_update_form.save()
       return redirect('school:student_portal')
   else:
-    form = StudentProfileForm()
-  return render(request, 'school/student_profile.html', { 'form':form })
+    user_update_form = StudentRegistrationForm(instance=request.user)
+    profile_update_form = StudentProfileForm(instance=request.user.student_profile_update)
+    pic_update_form = StudentProfilePicForm(request.POST, request.FILES, instance=request.user.student_profile_update)
+    
+    context = {
+      'user_update_form': user_update_form,
+      'profile_update_form': profile_update_form,
+      'pic_update_form': pic_update_form,
+    }
+  return render(request, 'school/student_portal.html', context )
 
 #20 STUDENT_PIC updtae
 def student_pic_update(request):
@@ -348,4 +329,16 @@ def contact(request):
       return redirect('school:home')
   else:
     form = ContactForm()
+  return render(request, 'school/contact.html', { 'form':form })
+
+#34. Feedback 
+def feedback(request):
+  form = Feedback()
+  if request.method == "POST":
+    form = Feedback(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('school:home')
+  else:
+    form = Feedback()
   return render(request, 'school/contact.html', { 'form':form })

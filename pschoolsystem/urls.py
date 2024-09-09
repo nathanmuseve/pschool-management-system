@@ -24,4 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('school.urls')),
 
-]  + debug_toolbar_urls() + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]  + debug_toolbar_urls()
