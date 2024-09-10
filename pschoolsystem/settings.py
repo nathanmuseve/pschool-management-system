@@ -144,12 +144,12 @@ USE_TZ = True
     #MEDIA AND STATIC FOR PRODUCTION
 # # Static files (CSS, JavaScript, Images)
 # STATIC_ROOT = BASE_DIR / 'assets'
-STATIC_URL = '/static/'
+STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static/",
 ]
-# Media files (Uploaded files)
+# # Media files (Uploaded files)
 # MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 

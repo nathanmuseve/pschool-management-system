@@ -71,7 +71,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-  color: #8BC352;
+  color: rgb(4, 169, 4)
 }
 
 /* Dropdown Menu */
@@ -138,6 +138,9 @@ input:valid, textarea:valid, select:valid{
 input:invalid{
 color: red;
 }
+input::placeholder {
+  color: rgb(5, 165, 5);
+}
 
 
 
@@ -156,6 +159,9 @@ button {
   border-radius: 4px;
   margin: 6px 0;
   padding: 8px 1rem;
+}
+button:hover{
+  background-color: #022c43;
 }
 /* FOOTER  */
 footer, .details {
