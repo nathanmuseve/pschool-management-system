@@ -15,6 +15,7 @@
       {% csrf_token %}
       {{form }}
       <button  type="submit">Register</button>
+      <p class="text-center text-sm">Have an account? <a href="{% url 'school:staff_login' %}">Login</a></p>
   </form>
   </div>
 </section>

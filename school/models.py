@@ -56,7 +56,7 @@ class StudentDetails(models.Model):
         ('GRADE_EIGHT', 'Eight'),
         ('GRADE_NINE', 'Nine'),
     )
-    grade_admitted = models.CharField(max_length=30, choices=CLASS_CHOICES, default="GRADE_ONE", unique=True)
+    grade_admitted = models.CharField(max_length=30, choices=CLASS_CHOICES, default="GRADE_ONE")
     admin_number = models.BigAutoField(unique=True, primary_key=True, verbose_name="Admission Number")
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     middle_name = models.CharField(max_length=50, blank=True)

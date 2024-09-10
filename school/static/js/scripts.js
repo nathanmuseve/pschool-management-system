@@ -14,3 +14,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// toggle menu 
+let head = document.getElementById('head');
+let nav = document.getElementById('nav1');
+let menu = document.getElementById('menu');
+
+menu.addEventListener('click', function() {
+  if (nav.style.display == 'none') {
+    nav.style.display = "flex";
+  } else {
+    nav.style.display = "none";
+  }
+  if (head.style.height == '75px') {
+    head.style.height = "300px";
+  } else {
+    head.style.height = "75px";
+  }
+});

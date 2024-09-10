@@ -103,7 +103,7 @@ def student_registration(request):
     form = StudentRegistrationForm(request.POST, request.FILES)
     if form.is_valid():
       login(request, form.save())
-      return redirect('school:home')
+      return redirect('school:student_login')
   else:
     form = StudentRegistrationForm()
   return render(request, 'school/student_registration.html', context)
@@ -116,7 +116,6 @@ def student_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
       login(request, user)
-      # next_url = request.POST.get('next') or request.GET.get('next') or 'school:home'
       return redirect('school:home')
   # else:
   #   error_message = "Invalid entries. Confirm that passwords match."

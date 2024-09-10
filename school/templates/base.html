@@ -14,34 +14,43 @@
   
 <main class=" ">
   {% block navigation %}
-    <header>
-      <nav>
-        
-        <ul>
-          <li><a href="{% url 'school:home' %}">Home</a></li>
-          <li class="dropdown">
-            <a href="#">About <i class="fa-solid fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="{% url 'school:history' %}">History <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:philosophy' %}">Our Philosophy <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:vission' %}">Vision & Mission <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:goal' %}">Our Goals <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:values' %}">Our Values <i class="fa-solid fa-angle-right"></i></a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a href="#">School <i class="fa-solid fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="{% url 'school:enrollment' %}">Enrollment <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:student_registration' %}">Admissions <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:subjects' %}">Subjects <i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:staff_portal' %}">Staff<i class="fa-solid fa-angle-right"></i></a>
-              <a href="{% url 'school:student_portal' %}">Students <i class="fa-solid fa-angle-right"></i></a>
-            </div>
-          </li>
-          <li><a href="{% url 'school:contact'  %}">Contact</a></li>
-        </ul>
-      </nav>
+    <header id="head">
+      <section class="relative">
+        <div id="menu">
+          <span> </span>
+          <span> </span>
+          <span> </span>
+        </div>
+        <nav>
+          <h2>ABCD SCHOOL</h2>
+          <ul id="nav1">
+            <li><a href="{% url 'school:home' %}">Home</a></li>
+            <li class="dropdown">
+              <a href="#">About <i class="fa-solid fa-caret-down"></i></a>
+              <div class="dropdown-content">
+                <a href="{% url 'school:history' %}">History <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:philosophy' %}">Our Philosophy <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:vission' %}">Vision & Mission <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:goal' %}">Our Goals <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:values' %}">Our Values <i class="fa-solid fa-angle-right"></i></a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="#">School <i class="fa-solid fa-caret-down"></i></a>
+              <div class="dropdown-content">
+                <a href="{% url 'school:enrollment' %}">Enrollment <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:student_registration' %}">Admissions <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:subjects' %}">Subjects <i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:staff_portal' %}">Staff<i class="fa-solid fa-angle-right"></i></a>
+                <a href="{% url 'school:student_portal' %}">Students <i class="fa-solid fa-angle-right"></i></a>
+              </div>
+            </li>
+            <li><a href="{% url 'school:contact'  %}">Contact</a></li>
+          </ul>
+        </nav>
+      
+      </section>
+      
     </header>
   {% endblock navigation %}
     

@@ -32,6 +32,9 @@ a {
   font-weight: 700;
   margin: 0 auto;
 }
+a:hover {
+  color: rgb(12, 174, 12);
+}
 strong {
   color: #00517C;
 }
@@ -49,10 +52,16 @@ header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 2rem;
+}
+header nav h2 {
+  color: rgb(4, 171, 4);
 }
 
 header nav ul {
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   gap: 1.5rem;
 }
@@ -64,7 +73,8 @@ header nav ul li {
 }
 
 header nav ul li a {
-  font-weight: 700;
+  font-weight: 500;
+  text-transform: capitalize;
   color: white;
   text-decoration: none;
   font-size: 1.5rem;
@@ -91,10 +101,11 @@ header nav ul li a:hover {
 .dropdown-content a {
   text-align: left;
   color: black;
-  padding: 8px 16px;
+  padding: 6px 16px;
   text-decoration: none;
   display: inline-block;
   font-size: 1.2rem;
+  font-weight: 400;
 }
 
 .dropdown-content a:hover {
@@ -105,7 +116,30 @@ header nav ul li a:hover {
   display: block;
   opacity: 1;
 }
-
+/* Menu toggle */
+section .relative {
+  position: relative;
+  top: 0;
+}
+#menu {
+  position: absolute;
+  display: none;
+  top: 2px;
+  right: 2rem;
+  flex-direction: column;
+  gap:3px;
+  flex-wrap: nowrap;
+  border-radius: 2px;
+  padding: 2px;
+}
+ #menu span {
+  padding: 1px;
+  width: 36px;
+  height: 3px;
+  margin: 0.2rem;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
 
 form {
   width: 50%;
@@ -138,8 +172,8 @@ input:valid, textarea:valid, select:valid{
 input:invalid{
 color: red;
 }
-input::placeholder {
-  color: rgb(5, 165, 5);
+input::placeholder, textarea::placeholder {
+  color: rgba(5, 165, 5, 0.6);
 }
 
 
@@ -163,13 +197,22 @@ button {
 button:hover{
   background-color: #022c43;
 }
+
+/* home page  */
+.home p {
+  font-size: 1.2rem;
+  color: rgb(18, 6, 6);
+  line-height: 3.5rem;
+}
 /* FOOTER  */
+.foot {
+  padding: 1rem 2rem;
+}
 footer, .details {
   background-color: #00517C;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1rem 2rem;
 }
 
 footer .address ul li{
@@ -181,7 +224,6 @@ footer .address ul li{
 }
 footer .address ul li i{
   color: white;
-  margin-right: 1rem;
 }
 footer .return-menu, .school {
   display: flex;
@@ -198,7 +240,7 @@ footer .return-menu a, .others,.school a{
   text-decoration: none;
 }
 footer .return-menu a:hover, .school a:hover {
-  color: #8BC352;
+  color: rgb(10, 160, 10);
 }
 .others {
   padding: 1rem 2rem;
@@ -209,6 +251,9 @@ footer .return-menu a:hover, .school a:hover {
   flex-wrap: wrap;
   padding: 1rem 2rem;
 }
+.details {
+  padding: 0 2rem;
+}
 .socials a  {
   padding: 6px;
   margin-right: 1rem;
@@ -216,11 +261,20 @@ footer .return-menu a:hover, .school a:hover {
   text-align: center;
   background-color: white;
 }
+.school a {
+  margin-left: 1rem;
+}
+.socials a:hover {
+  background-color: rgb(15, 167, 15);
+  color: white;
+}
 .details p {
   color: white;
 }
-.footer {
-  bottom: 0;
+.details {
+  padding: 0 4rem;
+  margin: 0 0 3rem 0;
+
 }
 
 /* Subjects template  */
@@ -233,4 +287,176 @@ footer .return-menu a:hover, .school a:hover {
 table {
   border-collapse: collapse;
   margin: 1.5rem auto;
+  border: 2px solid #00517C;
+}
+table tr, table th, table td {
+  padding: 6px;
+  border: 2px solid #00517C;
+}
+table tr th {
+  background-color: #00517C;
+  color: rgb(14, 160, 14);
+  /* border-right: 2px solid #fff; */
+}
+table tr:nth-child(even) {
+  background-color: #59a9d4;
+}
+
+/* MEDIA QUERY  */
+@media  (min-width: 360px) and (max-width: 600px){
+ /* home page  */
+.home {
+  width: 100%;
+  height: 100%;
+}
+.home h1 {
+  padding: 4px 1rem;
+}
+.home p {
+  color: black;
+  padding: 2px 1rem;
+  font-weight: bolder;
+}
+
+/* GLOBAL STYLES  */
+a {
+  font-weight: 500;
+}
+
+/* NAVIGATION MENU  */
+header {
+  background-color: #00517C;
+  /* height: 400px; */
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+header nav {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2rem;
+}
+header nav #nav1 {
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+header nav ul li a {
+  font-weight: 400;
+  font-size: 0.90rem;
+}
+/* Dropdown Menu */
+.dropdown-content {
+  padding-left: 1rem;
+  background-color: #00517C;
+  max-width: 350px;
+  box-shadow: none
+}
+
+.dropdown-content a {
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Menu toggle */
+header section #menu {
+  display: flex;
+  top: 1.3rem;
+}
+
+form {
+  width: 90%;
+  margin: 0.5rem auto;
+  padding: 1.5rem;
+  border-radius: 4px;
+}
+input, textarea {
+  width: 100%;
+  border: 1px solid #00517C;
+  border-radius: 3px;
+  padding: 4px 0.75rem;
+}
+input:focus, textarea:focus , select:focus {
+  border: 0.5px solid #7c0000;
+}
+input:valid, textarea:valid, select:valid{
+  border: 1px solid #8BC352;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(5, 165, 5, 0.5);
+}
+
+label {
+  font-size: small;
+  margin: 2px 0;
+}
+button {
+  width: 70%;
+  padding: 4px 0.75rem;
+}
+button:hover{
+  background-color: #022c43;
+}
+
+/* home page  */
+.home p {
+  font-size: small;
+  color: rgba(18, 6, 6, 0.9);
+  line-height: 1.5rem;
+}
+/* FOOTER  */
+.foot {
+  padding: 0.5rem 1rem;
+}
+
+footer .address ul li{
+  list-style-type: none;
+  line-height: 1rem;
+  letter-spacing: 1px;
+}
+footer .return-menu {
+  padding: 0 1.5rem;
+}
+footer .return-menu a, .others,.school a{
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 1px;
+  padding: 3px 0 ;
+}
+.others {
+  padding: 0 1.5rem;
+}
+.details {
+  padding: 0 1.5rem;
+}
+.details {
+  padding: 0 2rem;
+}
+.school a {
+  margin-left: 1rem;
+}
+.details {
+  padding: 0 2rem;
+  margin: 0 0 2rem 0;
+
+}
+
+/* students enrolled  */
+table tr, table th, table td {
+  padding: 6px;
+  border: 2px solid #00517C;
+}
+table tr th {
+  background-color: #00517C;
+  color: rgb(14, 160, 14);
+  /* border-right: 2px solid #fff; */
+}
+table tr:nth-child(even) {
+  background-color: #59a9d4;
+}
 }
