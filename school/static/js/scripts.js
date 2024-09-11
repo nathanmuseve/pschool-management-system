@@ -32,3 +32,17 @@ menu.addEventListener('click', function() {
     head.style.height = "75px";
   }
 });
+
+// make active link with different color 
+function makeLinkActive(link) {
+  // Remove the 'active' class from all links
+  const alllinks = document.querySelectorAll('a');
+  alllinks.forEach(link => link.classList.remove('active'));
+
+  // Add the 'active' class to the clicked link
+  link.classList.add('active');
+}
+
+// Add an event listener to all links
+const links = document.querySelectorAll('a');
+links.forEach(link => link.addEventListener('click', () => makeLinkActive(link)));

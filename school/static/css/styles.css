@@ -24,6 +24,28 @@
   padding: 2rem;
 }
 
+/* VISION & MISSION  */
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.mission {
+  margin: 1rem auto;
+  width: 250px;
+  padding: 4px 6px;
+}
+.mission P:hover {
+  color: white;
+}
+.mission:hover {
+  border: 2px dotted #024163;
+  background-color: green;
+}
+.mission h2 {
+  color: #00517C;
+}
 /* GLOBAL STYLES  */
 a {
   text-decoration: none;
@@ -82,6 +104,10 @@ header nav ul li a {
 
 header nav ul li a:hover {
   color: rgb(4, 169, 4)
+}
+/* by js  for active links */
+.active {
+  color: rgb(4, 169, 4);
 }
 
 /* Dropdown Menu */
@@ -447,16 +473,6 @@ footer .return-menu a, .others,.school a{
 }
 
 /* students enrolled  */
-table tr, table th, table td {
-  padding: 6px;
-  border: 2px solid #00517C;
-}
-table tr th {
-  background-color: #00517C;
-  color: rgb(14, 160, 14);
-  /* border-right: 2px solid #fff; */
-}
-table tr:nth-child(even) {
-  background-color: #59a9d4;
-}
+table tr th:nth-child(5), table tr td:nth-child(5), table tr th:nth-child(6), table tr td:nth-child(6), table tr th:nth-child(8), table tr td:nth-child(8) {
+  display: none;
 }

@@ -4,7 +4,7 @@
 {% block title %}
   Enrollment
 {% endblock title %}
-  
+  {% load static %}
 
 {% block content %}
   <section>
@@ -19,6 +19,9 @@
             <th>Last Name</th>
             <th>Gender</th>
             <th>Age</th>
+            <th>Grade</th>
+            <th>Profile</th>
+
           </tr>
         </thead>
         {% for student  in  students %}
@@ -29,6 +32,9 @@
           <td>{{ student.user.last_name }}</td>
           <td>{{ student.gender }}</td>
           <td>{{ student.age }}</td>
+          <td>{{ student.grade_admitted }}</td>
+          <td><img src="{{ student.profile_picture }}" alt="Profile"></td>
+
         </tr>
       {% endfor %}
       </tbody>

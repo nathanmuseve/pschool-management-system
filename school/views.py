@@ -36,7 +36,12 @@ def values(request):
 #9.enrollment
 def enrollment(request):
   students = StudentDetails.objects.all()
-  return render(request, 'school/enrollment.html', { 'students':students })
+  subjects = Subjects.objects.all()
+  context = {
+    'students': students,
+    'subjects': subjects
+  }
+  return render(request, 'school/enrollment.html', context)
 
 
 #11.curriculum
